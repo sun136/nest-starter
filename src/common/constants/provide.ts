@@ -1,0 +1,1 @@
+export const APP_REDIS_CLIENT = 'APP_REDIS_CLIENT';
