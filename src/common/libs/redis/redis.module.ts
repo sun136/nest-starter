@@ -6,7 +6,7 @@ import { RedisService } from './redis.service';
 
 @Module({})
 export class RedisModule {
-  static register(options: RedisOptions): DynamicModule {
+  static register(options?: RedisOptions): DynamicModule {
     return {
       module: RedisModule,
       providers: [createClient(options), RedisService],

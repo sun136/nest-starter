@@ -23,14 +23,14 @@ export class RedisService {
     return await this.client.set(key, val, 'EX', seconds);
   }
 
-  async get(key: RedisKey): Promise<RedisValue> {
+  async get(key: RedisKey): Promise<RedisValue | null> {
     if (this.isForbiddenKeys(key)) return null;
     return await this.client.get(key);
   }
 
   async del(...args: [keys: RedisKey[]]): Promise<number>;
   async del(...args: [...keys: RedisKey[]]): Promise<number>;
-  async del(args: any): Promise<number> {
+  async del(args: any): Promise<number | null> {
     if (this.isForbiddenKeys(args)) return null;
     return await this.client.del(args);
   }

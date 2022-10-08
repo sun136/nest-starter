@@ -3,7 +3,7 @@ import { Logger, Provider } from '@nestjs/common';
 import chalk from 'chalk';
 import Redis, { ClusterNode, ClusterOptions, RedisOptions } from 'ioredis';
 
-export const createClient = (options: RedisOptions): Provider => {
+export const createClient = (options: RedisOptions = {}): Provider => {
   return {
     provide: APP_REDIS_CLIENT,
     useFactory: () => {
