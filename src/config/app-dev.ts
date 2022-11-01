@@ -35,7 +35,6 @@ const config: ConfigOptions = {
     host: '127.0.0.1',
     port: 6379,
     retryStrategy: () => 10000,
-    sentinelReconnectStrategy: () => 10,
   },
 };
 
