@@ -3,6 +3,8 @@ import { Logger, Provider } from '@nestjs/common';
 import chalk from 'chalk';
 import Redis, { ClusterNode, ClusterOptions, RedisOptions } from 'ioredis';
 
+const logger = new Logger('RedisModule');
+
 export const createClient = (options: RedisOptions = {}): Provider => {
   return {
     provide: APP_REDIS_CLIENT,
@@ -12,14 +14,10 @@ export const createClient = (options: RedisOptions = {}): Provider => {
       redis.on('connect', () => {
         const timestampEnd = +new Date();
         const timeConsuming = timestampEnd - timestampStart;
-        Logger.log(
-          `${chalk.yellow('[RedisModule]')} ${chalk.green(
-            'Redis successfully connected',
-          )} ${chalk.yellow(`+${timeConsuming}ms`)}`,
-        );
+        logger.log(`Redis successfully connected ${chalk.yellow(`${timeConsuming}ms`)}`);
       });
       redis.on('error', (error) => {
-        Logger.error(chalk.yellow('[RedisModule] ') + chalk.red(error));
+        logger.error(error);
       });
       return redis;
     },
@@ -38,14 +36,10 @@ export const createClusterClient = (options: {
       redis.on('connect', () => {
         const timestampEnd = +new Date();
         const timeConsuming = timestampEnd - timestampStart;
-        Logger.log(
-          `${chalk.yellow('[RedisModule]')} ${chalk.green(
-            'Redis Cluster successfully connected',
-          )} ${chalk.yellow(`+${timeConsuming}ms`)}`,
-        );
+        logger.log(`Redis Cluster successfully connected ${chalk.yellow(`${timeConsuming}ms`)}`);
       });
       redis.on('error', (error) => {
-        Logger.error(chalk.yellow('[RedisModule] ') + chalk.red(error));
+        logger.error(error);
       });
       return redis;
     },
